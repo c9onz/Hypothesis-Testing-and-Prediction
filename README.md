@@ -1,7 +1,7 @@
 # Hypothesis-Testing-and-Prediction
 A repo demonstrating linear, quadratic, and exponential models to predict share price movement, hypothesis testing to predict expected salaries of college students, and variance among factors and single factor to determine tablet dissolution rates and comparisons of advertisements for a specific product using Excel's Data Analytics tool. 
 
-[Manufacturers and Weight Effects on Prices of Laptops: Anova Two Factor w/ Replication](https://1drv.ms/x/c/2b5301108127b361/IQDNxopuRt1GTIXIG-yWbMfSARGbGHn4ZJuWwT0pbeGp3h8?e=rzeNik)
+[Manufacturers and Weight Effects on Prices of Laptops: Anova Two Factor w/ Replication](https://1drv.ms/x/c/2b5301108127b361/IQDNxopuRt1GTIXIG-yWbMfSARGbGHn4ZJuWwT0pbeGp3h8?e=7hEua8)
 
 [Share Price Movement: Linear, Quadratic, Exponential Models](https://onedrive.live.com/:x:/g/personal/2b5301108127b361/IQB9txenHxipT6dakNsamVXYAfK1g-lptpgTtTNOoF56tXg?rtime=p2vJnKVc3kg&redeem=aHR0cHM6Ly8xZHJ2Lm1zL3gvYy8yYjUzMDExMDgxMjdiMzYxL0lRQjl0eGVuSHhpcFQ2ZGFrTnNhbVZYWUFmSzFnLWxwdHBnVHRUTk9vRjU2dFhnP2U9WXBYblBp)
 
