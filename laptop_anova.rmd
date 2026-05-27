@@ -1,0 +1,56 @@
+---
+title: "Manufacturer and Device Weight Effects on Market Price"
+author: "Christine Gonzalez"
+date: "2026-05-22"
+output: github_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(dplyr)
+library(car)
+library(ggplot2)
+library(hrbrthemes)
+library(viridis)
+```
+
+#### ANOVA TWO FACTOR WITH REPLICATION
+
+This ANOVA two-factor model was developed to compare effects from a laptop dataset in R against the same model developed with Excel's Data Analysis Toolpak. The two factors, laptop manufacturer and device weight, were observed for effects on market price. Device weights were categorically segmented into light, medium, and heavy distributions. Since I was working with an unbalanced design, a smaller sample of the original dataset was used in the Excel model to help reduce misleading or biased results. The final design consists of three replicas for a total of nine combinations across two factors. 
+
+Key Findings from Excel Model: Manufacturer alone had no effect on market prices of laptops. While weight segments and interaction between manufacturer and weight segments had a significant effect on market price, explaining ~42% observed variance. 
+
+The same model in R, using Type III ANOVA, yielded slightly similar results with some differences among factors after utilizing the larger dataset. 
+Key Findings: Weight alone explained minimal additional variance after accounting for interaction effects. While manufacturer and interaction between Manufacturer and weight segments had significant effects on market price, explaining ~16-17% observed variance.
+
+Key Takeaway: Even with the reduced data, the interesting thing about the Excel model is that it's actually plausible in today's economy given the increasing demand for heavy gaming laptops with more processing power and ultralight laptops for easy portability. Both device weights are generally more expensive and consumers sometimes overlook manufacturer if the device meets the right specifications and components for their needs.
+
+```{r, echo = FALSE}
+
+data <- read_csv("laptops.csv", show_col_types = FALSE)
+
+lap_data <- filter(data, !Manufacturer %in% c("Samsung", "Huawei", "Razer", "Xiaomi", "MSI"))
+
+lap_data$Manufacturer <- as.factor(lap_data$Manufacturer)
+lap_data$Weight_segment <- as.factor(lap_data$Weight_segment)
+
+laptop_lm <- lm(Price ~ lap_data$Manufacturer*lap_data$Weight_segment, data = lap_data)
+
+laptop_model <- Anova(laptop_lm, type = "III")
+
+laptop_model
+```
+```{r, echo=FALSE}
+
+#Manufacturer <- as.factor(lap_data$Manufacturer)
+#Weight_segment <- as.factor(lap_data$Weight_segment)
+
+replica_mn <- lap_data %>% group_by(Manufacturer, Weight_segment) %>% summarise(avg_price = mean(Price), .groups = "drop")
+
+weight_reorder <- replica_mn %>% mutate(Weight_segment = fct_relevel(Weight_segment, "Light", "Medium", "Heavy"))
+
+#head(replica_mn, n=10)
+
+ggplot(weight_reorder, aes(x = Weight_segment, y = avg_price, fill = Weight_segment)) + geom_col(alpha = 0.8) + coord_flip()+  scale_x_discrete(limits = rev) + theme_ipsum() + theme(palette.color.discrete = "turbo", legend.position="none",panel.spacing = unit(0.7, "lines"), strip.text.x = element_text(size = 10), plot.title = element_text(hjust = 0.6, size = 14)) + facet_wrap(~Manufacturer) + labs(title = "Mean Price Distributions by Manufacturer and Weight Segments")
+```

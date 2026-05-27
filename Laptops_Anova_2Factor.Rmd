@@ -1,0 +1,33 @@
+---
+title: "Laptops_Anova_Two_Factor"
+author: "Christine Gonzalez"
+date: "2026-05-22"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(car)
+library(dplyr)
+```
+
+```{r, echo=FALSE}
+library(car)
+
+data <- read.csv("laptops.csv")
+
+lap_data <- filter(data, !Manufacturer %in% c("Samsung", "Huawei", "Razer", "Xiaomi", "MSI"))
+
+lap_data$Manufacturer <- as.factor(lap_data$Manufacturer)
+lap_data$Weight_segment <- as.factor(lap_data$Weight_segment)
+
+laptop_lm <- lm(Price ~ lap_data$Manufacturer*lap_data$Weight_segment, data = lap_data)
+
+laptop_model <- Anova(laptop_lm, type = "III")
+
+laptop_model
+```
+```{r, echo=FALSE}
+
+alias(lm(Price ~ lap_data$Manufacturer*lap_data$Weight_segment, data = lap_data))
+```
