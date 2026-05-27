@@ -18,7 +18,7 @@ total of nine combinations across two factors.
 Key Findings from Excel Model: Manufacturer alone had no effect on
 market prices of laptops. While weight segments and interaction between
 manufacturer and weight segments had a significant effect on market
-price, explaining ~42% observed variance.
+price, explaining ~50% observed variance -- or ~28% and ~22% respectively.
 
 The same model in R, using Type III ANOVA, yielded slightly similar
 results with some differences among factors after utilizing the larger
